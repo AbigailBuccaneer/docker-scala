@@ -7,10 +7,18 @@ MAINTAINER Abigail <AbigailBuccaneer@users.noreply.github.com>
 ENV SCALA_VERSION 2.11.0
 RUN wget -q "http://www.scala-lang.org/files/archive/scala-$SCALA_VERSION.deb" && \
     ( dpkg -i "scala-$SCALA_VERSION.deb" || true ) && \
-    apt-get update -y && apt-get install -y -f && \
-    rm "scala-$SCALA_VERSION.deb"
-RUN echo "deb https://dl.bintray.com/sbt/debian /" > /etc/apt/sources.list.d/sbt.list && \
-    apt-get install -y apt-transport-https && \
+    apt-get update -y && apt-get install -y -f --no-install-recommends && \
+    rm "scala-$SCALA_VERSION.deb" && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+ENV SBT_VERSION 0.13.11
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends apt-transport-https && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823 && \
-    apt-get update -y && apt-get install -y sbt && \
-    sbt exit
+    echo "deb https://dl.bintray.com/sbt/debian /" > /etc/apt/sources.list.d/sbt.list && \
+    apt-get update -y && apt-get install -y --no-install-recommends "sbt=$SBT_VERSION" && \
+    sbt exit && \
+    rm /etc/apt/sources.list.d/sbt.list && \
+    apt-get purge -y apt-transport-https && \
+    apt-get clean -y && \
+    rm -rf /var/lib/apt/lists/*
