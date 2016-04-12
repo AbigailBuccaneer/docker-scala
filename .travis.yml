@@ -22,5 +22,5 @@ env:
   - VERSION=2.11.8
 
 script:
-  - docker build "$VERSION" -t abigail/scala:local
+  - docker build -t abigail/scala:local "$VERSION" 
   - docker run --rm abigail/scala:local bash -c 'echo util.Properties.versionString | scala'
