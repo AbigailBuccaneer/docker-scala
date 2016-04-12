@@ -23,4 +23,4 @@ env:
 
 script:
   - docker build -t abigail/scala:local "$VERSION" 
-  - docker run --rm abigail/scala:local bash -c 'echo util.Properties.versionString | scala'
+  - ./test abigail/scala:local

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+image="${1-abigail/scala:latest}"
+echo "image: $image"
+
+echo -n "testing running scala via stdin... "
+docker run --rm "$image" bash -c 'echo util.Properties.versionString | scala' > /dev/null
+if [ "$?" -eq 0 ] ; then echo "success"; else echo "failure"; exit 1; fi
+
+echo -n "testing running scala via file... "
+tmp="$(mktemp -d)"
+echo "println(util.Properties.versionString)" > "$tmp/test.scala"
+docker run --rm -v "$tmp:$tmp" "$image" scala "$tmp/test.scala" > /dev/null
+rm -r "$tmp"
+if [ "$?" -eq 0 ] ; then echo "success"; else echo "failure"; exit 1; fi
+
+echo "all tests passed!"
