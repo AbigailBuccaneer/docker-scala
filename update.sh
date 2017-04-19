@@ -37,7 +37,6 @@ function generate_dockerfile {
 		# Do not edit it locally - your changes will be lost!
 
 		FROM $base_image
-		MAINTAINER Abigail <AbigailBuccaneer@users.noreply.github.com>
 
 		ENV SCALA_VERSION $version
 		RUN wget -q "http://www.scala-lang.org/files/archive/scala-\$SCALA_VERSION.deb" && \\

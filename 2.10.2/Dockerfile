@@ -2,7 +2,6 @@
 # Do not edit it locally - your changes will be lost!
 
 FROM openjdk:7-jdk
-MAINTAINER Abigail <AbigailBuccaneer@users.noreply.github.com>
 
 ENV SCALA_VERSION 2.10.2
 RUN wget -q "http://www.scala-lang.org/files/archive/scala-$SCALA_VERSION.deb" && \
