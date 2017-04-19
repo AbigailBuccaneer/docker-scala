@@ -20,6 +20,7 @@ env:
   - VERSION=2.11.6
   - VERSION=2.11.7
   - VERSION=2.11.8
+  - VERSION=2.11.11
 
 script:
   - docker build -t abigail/scala:local "$VERSION" 

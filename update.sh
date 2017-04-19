@@ -18,6 +18,7 @@ declare -a versions=(
 	2.11.6
 	2.11.7
 	2.11.8
+	2.11.11
 )
 
 for version in "${versions[@]}"
