@@ -4,8 +4,8 @@
 FROM openjdk:7-jdk
 
 ENV SCALA_VERSION 2.11.0
-RUN wget -q "https://www.scala-lang.org/files/archive/scala-$SCALA_VERSION.deb" && \
-    ( dpkg -i "scala-$SCALA_VERSION.deb" || true ) && \
+RUN curl "https://www.scala-lang.org/files/archive/scala-$SCALA_VERSION.deb" -o scala.deb && \
+    ( dpkg -i scala.deb || true ) && \
     apt-get update -y && apt-get install -y -f --no-install-recommends && \
-    rm "scala-$SCALA_VERSION.deb" && \
+    rm scala.deb && \
     rm -rf /var/lib/apt/lists/*
