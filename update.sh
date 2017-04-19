@@ -37,7 +37,6 @@ do
 		    ( dpkg -i "scala-\$SCALA_VERSION.deb" || true ) && \\
 		    apt-get update -y && apt-get install -y -f --no-install-recommends && \\
 		    rm "scala-\$SCALA_VERSION.deb" && \\
-		    apt-get clean && \\
 		    rm -rf /var/lib/apt/lists/*
 	EOD
 done
